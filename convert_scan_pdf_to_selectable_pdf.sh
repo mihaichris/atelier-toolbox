@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ocrmypdf $1 $2
+ocrmypdf --force-ocr $1 $2
