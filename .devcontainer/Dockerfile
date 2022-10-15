@@ -10,10 +10,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 
 # Update packages
-RUN apt get update && apt get upgrade -y
+RUN apt update && apt upgrade -y
 
 # Install dependencies
 RUN apt install ffmpeg libsm6 libxext6 ocrmypdf -y
-
-COPY requirements.txt /tmp/pip-tmp/
-RUN pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt
