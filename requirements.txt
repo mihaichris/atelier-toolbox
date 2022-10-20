@@ -1,3 +1,0 @@
-## 📕 Recomanded libraries
-pdf2docx
-rembg
