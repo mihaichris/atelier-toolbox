@@ -14,3 +14,6 @@ RUN apt update && apt upgrade -y
 
 # Install dependencies
 RUN apt install ffmpeg libsm6 libxext6 ocrmypdf -y
+
+## Install poetry
+RUN pip3 install poetry
