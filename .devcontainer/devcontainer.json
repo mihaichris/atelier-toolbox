@@ -15,7 +15,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"bungcip.better-toml"
+				"bungcip.better-toml",
+				"ms-python.python"
 			]
 		}
 	}
