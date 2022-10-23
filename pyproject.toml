@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "toolbox"
+version = "0.1.0"
+description = "Tools for various automations 🧰"
+authors = ["Mihai"]
+readme = "README.md"
+packages = [{include = "pdf", from = "src"}, {include = "business", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ocrmypdf = "^14.0.1"
+pdf2docx = "^0.5.6"
+typer = "^0.6.1"
+rich = "^12.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+pdf = "pdf.cli:main"
