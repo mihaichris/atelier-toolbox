@@ -1,7 +1,5 @@
-
-import typer
-from rich import print
+import click
 
 
 def show_message(message: str) -> None:
-    print(message)
+    click.echo(click.style(message, fg='blue'))
