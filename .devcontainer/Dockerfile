@@ -1,19 +1,21 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/ubuntu/.devcontainer/base.Dockerfile
+FROM python:3.10.8-bullseye
 
-# [Choice] Ubuntu version (use ubuntu-22.04 or ubuntu-18.04 on local arm64/Apple Silicon): ubuntu-22.04, ubuntu-20.04, ubuntu-18.04
-ARG VARIANT="jammy"
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
+ARG USERNAME=beaver
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Create the user
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    #
+    # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
+    && apt-get update \
+    && apt-get install ffmpeg libsm6 libxext6 ocrmypdf -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
 
-
-# Update packages
-RUN apt update && apt upgrade -y
-
-# Install dependencies
-RUN apt install ffmpeg libsm6 libxext6 ocrmypdf -y
+# [Optional] Set the default user. Omit if you want to keep the default as root.
+# USER $USERNAME
 
 ## Install poetry
-RUN pip3 install poetry
+RUN pip install poetry
