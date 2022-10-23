@@ -1,20 +1,29 @@
+import click
 import typer
 
-from .converter import convert_pdf_to_docx, convert_pdf_to_selectable
+from pdf.converter import convert_pdf_to_docx, convert_pdf_to_selectable
 from common.output import show_message
 
-app = typer.Typer(help="Awesome CLI for working with PDF files.")
+app = typer.Typer()
 
 
-@app.command("convert_to_selectable", help="Converts a scan PDF file to selectable PDF.")
-def hello_world():
-    show_message("Converted to selectable")
+@app.command()
+@click.argument('input_file')
+@click.argument('output_file')
+def convert_pdf_to_selectable_pdf(input_file: str, output_file: str):
+    """Converts a scan PDF file to selectable PDF."""
+    convert_pdf_to_selectable(input_file, output_file)
+    show_message("File converted successfully[green].")
 
 
-@app.command("convert_to_docx", help="Converts a PDF file to a DOCX file.")
-def hello_world():
+@app.command()
+def convert_to_docx():
+    """Converts a PDF file to a DOCX file."""
     show_message("Converted to DOCX")
 
 
+typer_click_object = typer.main.get_command(app)
+
+
 def main():
-    app()
+    typer_click_object()
