@@ -545,7 +545,7 @@ test = ["black (>=22.3.0,<23.0.0)", "coverage (>=5.2,<6.0)", "isort (>=5.0.6,<6.
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "4fd39505fcd051d62b9480574c6fb81c833b48b363b36393bc780ca16ce0da6a"
+content-hash = "f93eca2e1d6be7244ccc271ee4679d6fbd4efa8e22b70831147e5251b75f7c40"
 
 [metadata.files]
 attrs = [
