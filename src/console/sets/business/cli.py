@@ -8,7 +8,7 @@ from common.output import show_message
 app = typer.Typer(name="Business CLI Tool")
 
 
-@app.command("working_hours")
+@app.command()
 def working_hours(is_today: bool = typer.Option(False, '--today', help="Get current day working hours.", is_flag=True),
                   is_month: bool = typer.Option(False, '--this-month', help="Get current month working hours.", is_flag=True)):
     """Get working hours based of a date period."""
@@ -22,7 +22,7 @@ def working_hours(is_today: bool = typer.Option(False, '--today', help="Get curr
             month_working_hours))
 
 
-@app.command("working_days")
+@app.command()
 def working_days(is_month: bool = typer.Option(False, '--this-month', help="Get current month working days.", is_flag=True)):
     """Get working days based of a date period."""
     year = datetime.now().year
