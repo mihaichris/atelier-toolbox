@@ -1,0 +1,36 @@
+[[connect_messages]]
+id = 1
+type = 'simple'
+lang='en'
+content = '''Hello [Name],
+
+I saw that you are an experienced IT recruiter. I would appreciate the possibility of networking with you!
+
+Best regards,
+[Your Name]
+'''
+
+[[connect_messages]]
+id = 2
+lang='en'
+type = 'simple'
+content = '''Hello [Name],
+
+I would like to add you to my network of connections and keep in touch regarding professional opportunities.
+
+Best regards,
+[Your Name]
+'''
+
+
+[[connect_messages]]
+id = 3
+lang='en'
+type = 'simple'
+content = '''Hello [Name],
+
+I read from your profile that you are an IT recruiter and I would appreciate the possibility of networking with you.
+
+Best regards,
+[Your Name]
+'''
