@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 
 
-def get_first_date_of_current_month(year, month):
+def get_first_date_of_month(year, month):
     """Return the first date of the month.
 
     Args:
