@@ -1,7 +1,11 @@
 .PHONY: test
 test:
-	poetry run pytest
+	poetry run test
 
 .PHONY: wheel
 wheel:
 	poetry build -f wheel
+
+.PHONY: install
+test:
+	poetry install
