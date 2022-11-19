@@ -1,3 +1,4 @@
+import os
 import ocrmypdf
 from common.output import show_message
 from common.file import get_filename
@@ -18,3 +19,4 @@ def convert_pdf_to_docx(pdf_file: str, docx_file: str):
     cv = Converter(selectable_pdf)
     cv.convert(docx_file, multi_processing=True)
     cv.close()
+    os.remove(selectable_pdf)
