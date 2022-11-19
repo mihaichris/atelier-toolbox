@@ -9,3 +9,7 @@ wheel:
 .PHONY: install
 test:
 	poetry install
+
+.PHONY: lint
+lint:
+	pylint src
