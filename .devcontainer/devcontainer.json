@@ -16,7 +16,8 @@
 		"vscode": {
 			"extensions": [
 				"bungcip.better-toml",
-				"ms-python.python"
+				"ms-python.python",
+				"ms-python.pylint"
 			]
 		}
 	}
