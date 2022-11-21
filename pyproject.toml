@@ -28,4 +28,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 toolbox = "console.cli:main"
-test = "scripts:test"
+test = { callable = "scripts:test", extras = ["test"] }
