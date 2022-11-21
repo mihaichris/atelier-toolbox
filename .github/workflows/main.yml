@@ -1,0 +1,57 @@
+name: "main"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - '.gitattributes'
+    
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.10'
+
+jobs:
+  unit-testing:
+    name: "Run unit tests"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v3"
+      - name: "Install python"
+        uses: actions/setup-python@v4
+      - name: "Install poetry"
+        uses: snok/install-poetry@v1.3.3
+      with:
+        python-version: {{ PYTHON_VERSION }} 
+        - run: poetry run tests
+
+  static-code-analysis:
+    name: "Static Code Analysis"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v3"
+      - name: "Install python"
+        uses: actions/setup-python@v4
+      - name: "Install poetry"
+        uses: snok/install-poetry@v1.3.3
+      with:
+        python-version: {{ PYTHON_VERSION }} 
+        - run: pylint src/
+  
+
+
+  
