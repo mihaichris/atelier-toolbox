@@ -95,6 +95,7 @@ jobs:
     - name: "Run Pylint"
       run: | 
         source $VENV 
+        ls -altr
         pylint src/
 
 
