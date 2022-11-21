@@ -30,13 +30,15 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: "actions/checkout@v3"
+
       - name: "Install python"
         uses: actions/setup-python@v4
+
       - name: "Install poetry"
         uses: snok/install-poetry@v1.3.3
-      with:
-        python-version: {{ PYTHON_VERSION }} 
-        - run: poetry run tests
+        with:
+          python-version: {{ PYTHON_VERSION }} 
+          - run: poetry run tests
 
   static-code-analysis:
     name: "Static Code Analysis"
@@ -44,13 +46,15 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: "actions/checkout@v3"
+        
       - name: "Install python"
         uses: actions/setup-python@v4
+
       - name: "Install poetry"
         uses: snok/install-poetry@v1.3.3
-      with:
-        python-version: {{ PYTHON_VERSION }} 
-        - run: pylint src/
+        with:
+          python-version: {{ PYTHON_VERSION }} 
+          - run: pylint src/
   
 
 
