@@ -54,11 +54,14 @@ jobs:
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       run: poetry install --no-interaction
 
+    - name: "Install dependencies  (Linux)"
+      run: |
+        sudo apt-get update 
+        sudo apt-get install tesseract-ocr
+
     - name: "Run Unit tests"
       run: |
         source $VENV 
-        ls -altr
-        poetry run toolbox --help
         poetry run test
 
   static-code-analysis:
