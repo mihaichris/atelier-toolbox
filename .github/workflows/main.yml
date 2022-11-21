@@ -25,7 +25,7 @@ env:
 
 jobs:
   unit-testing:
-    name: "Run unit tests"
+    name: "Unit Testing"
     runs-on: "ubuntu-latest"
     steps:
     - name: "Checkout repository"
@@ -34,7 +34,7 @@ jobs:
     - name: "Install python"
       uses: actions/setup-python@v4
       with:
-        python-version: "$PYTHON_VERSION" 
+        python-version: $PYTHON_VERSION 
 
     - name: "Install poetry"
       uses: snok/install-poetry@v1.3.3
@@ -52,7 +52,7 @@ jobs:
     - name: "Install python"
       uses: actions/setup-python@v4
       with:
-        python-version: "$PYTHON_VERSION"
+        python-version: $PYTHON_VERSION
 
     - name: "Install poetry"
       uses: snok/install-poetry@v1.3.3
