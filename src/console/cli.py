@@ -1,3 +1,4 @@
+"""Main command."""
 import typer
 
 from console.sets.pdf import pdf_app
@@ -10,4 +11,5 @@ command = typer.main.get_command(app)
 
 
 def main():
+    """Main input command."""
     command()
