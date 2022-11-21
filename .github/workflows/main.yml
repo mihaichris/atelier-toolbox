@@ -43,7 +43,7 @@ jobs:
       run: poetry install --no-interaction
     
     - name: "Run Unit tests"
-      run: poetry run tests
+      run: poetry run test
 
   static-code-analysis:
     name: "Static Code Analysis"
