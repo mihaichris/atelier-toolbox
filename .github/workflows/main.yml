@@ -60,6 +60,7 @@ jobs:
     - name: "Run Unit tests"
       run: |
         source $VENV 
+        ls -altr
         poetry run test
 
   static-code-analysis:
@@ -95,7 +96,6 @@ jobs:
     - name: "Run Pylint"
       run: | 
         source $VENV 
-        ls -altr
         pylint src/
 
 
