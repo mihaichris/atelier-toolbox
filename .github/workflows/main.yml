@@ -52,7 +52,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install --no-interaction --no-root
+      run: poetry lock [--no-update] && poetry install --no-interaction --no-root
 
     - name: "Run Unit tests"
       run: |
