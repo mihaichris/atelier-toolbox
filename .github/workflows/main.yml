@@ -61,6 +61,7 @@ jobs:
       run: |
         source $VENV 
         ls -altr
+        poetry run toolbox --help
         poetry run test
 
   static-code-analysis:
