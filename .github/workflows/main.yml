@@ -57,7 +57,7 @@ jobs:
     - name: "Install dependencies  (Linux)"
       run: |
         sudo apt-get update 
-        sudo apt-get install tesseract-ocr
+        sudo apt-get install tesseract-ocr ghostscript -y
 
     - name: "Run Unit tests"
       run: |
