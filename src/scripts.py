@@ -1,3 +1,4 @@
+"""Module for different scripts."""
 import subprocess
 
 
@@ -7,5 +8,5 @@ def test():
     `poetry run python -u -m unittest discover`
     """
     subprocess.run(
-        ['python', '-u', '-m', 'unittest', 'discover']
+        ['python', '-u', '-m', 'unittest', 'discover'], check=True
     )
