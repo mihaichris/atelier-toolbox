@@ -5,7 +5,7 @@ from console.sets.pdf.converter import convert_pdf_to_docx, convert_pdf_to_selec
 from common.output import show_message, abort
 from common.exceptions import ConvertPDFException
 
-app = typer.Typer(name="PDF CLI Tool")
+app = typer.Typer(short_help="PDF CLI Tool")
 
 
 @app.command()

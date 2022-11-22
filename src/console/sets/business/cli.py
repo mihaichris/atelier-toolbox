@@ -4,7 +4,7 @@ import typer
 from common.work import get_month_working_hours, get_month_working_days
 from common.output import show_message
 
-app = typer.Typer(name="Business CLI Tool")
+app = typer.Typer(short_help="Business CLI Tool")
 
 
 @app.command()
