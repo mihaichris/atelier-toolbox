@@ -6,7 +6,7 @@ Tools for various automations 🧰.
 
 ## Installation
 
-You can install the Real Python Feed Reader from [PyPI](https://pypi.org/):
+You can install the Toolbox from [PyPI](https://pypi.org/):
 
 ```python
 python -m pip install atelier-toolbox
