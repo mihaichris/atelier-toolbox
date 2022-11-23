@@ -1,4 +1,4 @@
-# toolbox
+# atelier-toolbox
 
 ## Description
 

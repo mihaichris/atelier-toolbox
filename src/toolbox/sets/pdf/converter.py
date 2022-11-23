@@ -2,8 +2,8 @@
 import os
 import ocrmypdf
 from pdf2docx import Converter
-from common.file import get_filename
-from common.exceptions import ConvertPDFException
+from toolbox.common.file import get_filename
+from toolbox.common.exceptions import ConvertPDFException
 
 
 def convert_pdf_to_selectable(input_file: str, output_file) -> None:

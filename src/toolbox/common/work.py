@@ -1,6 +1,6 @@
 """Module for work."""
 import numpy as np
-from common.calendar import get_first_date_of_month, get_last_date_of_month
+from toolbox.common.calendar import get_first_date_of_month, get_last_date_of_month
 
 
 def get_month_working_days(month: int, year: int) -> int:

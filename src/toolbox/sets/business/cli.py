@@ -1,8 +1,8 @@
 """Business set commands."""
 import datetime
 import typer
-from common.work import get_month_working_hours, get_month_working_days
-from common.output import show_message
+from toolbox.common.work import get_month_working_hours, get_month_working_days
+from toolbox.common.output import show_message
 
 app = typer.Typer(short_help="Business CLI Tool")
 

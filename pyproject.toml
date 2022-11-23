@@ -1,10 +1,13 @@
 [tool.poetry]
 name = "atelier-toolbox"
-version = "0.1.1"
+version = "0.2.2"
 description = "Tools for various automations 🧰"
 authors = ["Mihai"]
 readme = "README.md"
-packages = [{include = "console", from = "src"}]
+license = "MIT"
+repository = "https://github.com/mihaichris/atelier-toolbox"
+keywords = ["toolbox", "automation",  "poetry"]
+packages = [{ include = "toolbox", from="src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -27,5 +30,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-toolbox = "console.cli:main"
-test = "scripts:test"
+toolbox = "toolbox.cli:main"
+test = "toolbox.scripts:test"

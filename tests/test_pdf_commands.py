@@ -2,7 +2,7 @@
 import unittest
 import os
 from typer.testing import CliRunner
-from src.console.cli import app
+from toolbox.cli import app
 
 runner = CliRunner()
 

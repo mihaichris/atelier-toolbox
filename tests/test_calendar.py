@@ -1,7 +1,7 @@
 """Module for testing the calendar package."""
 import unittest
 import datetime
-from src.common.calendar import get_first_date_of_month, get_last_date_of_month
+from src.toolbox.common.calendar import get_first_date_of_month, get_last_date_of_month
 
 
 class TestCalendar(unittest.TestCase):

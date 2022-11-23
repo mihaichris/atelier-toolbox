@@ -1,8 +1,8 @@
 """Main command."""
 import typer
 
-from console.sets.pdf import pdf_app
-from console.sets.business import business_app
+from toolbox.sets.pdf import pdf_app
+from toolbox.sets.business import business_app
 
 app = typer.Typer(short_help="Tools for various automations. 🧰")
 app.add_typer(pdf_app, name="pdf")

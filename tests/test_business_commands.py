@@ -1,8 +1,8 @@
 """Module for testing Business commands."""
 import unittest
 from typer.testing import CliRunner
-from src.console.cli import app
-from src.common.work import get_month_working_days, get_month_working_hours
+from toolbox.cli import app
+from toolbox.common.work import get_month_working_days, get_month_working_hours
 
 runner = CliRunner()
 

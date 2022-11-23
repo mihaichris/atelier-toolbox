@@ -1,7 +1,7 @@
 """Module for testing the file package."""
 import unittest
 import os
-from src.common import file
+from src.toolbox.common import file
 
 
 class TestFile(unittest.TestCase):

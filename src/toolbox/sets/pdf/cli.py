@@ -1,9 +1,9 @@
 """PDF set commads."""
 from typing import Optional
 import typer
-from console.sets.pdf.converter import convert_pdf_to_docx, convert_pdf_to_selectable
-from common.output import show_message, abort
-from common.exceptions import ConvertPDFException
+from toolbox.sets.pdf.converter import convert_pdf_to_docx, convert_pdf_to_selectable
+from toolbox.common.output import show_message, abort
+from toolbox.common.exceptions import ConvertPDFException
 
 app = typer.Typer(short_help="PDF CLI Tool")
 
@@ -14,7 +14,6 @@ def convert_to_selectable_pdf(input_file: str, output_file: Optional[str] = type
     try:
         convert_pdf_to_selectable(input_file, output_file)
     except ConvertPDFException as err:
-        print(err)
         abort(f'Error converting to selectable pdf: {err}')
     show_message("File converted successfully[green].")
 

@@ -1,6 +1,6 @@
 """Module for testing the work package."""
 import unittest
-from src.common import work
+from src.toolbox.common import work
 
 
 class TestWork(unittest.TestCase):
