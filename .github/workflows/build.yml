@@ -1,0 +1,48 @@
+name: "build"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - '.gitattributes'
+    
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.10.8'
+
+jobs:
+  build-for-windows:
+    name: "Build for Windows"
+    runs-on: "windows-latest"
+    steps:
+    - name: "Checkout repository"
+      uses: "actions/checkout@v3"
+
+    - name: "Install python"
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install dependencies
+      run: python -m pip install -r requirements.txt
+
+    - name: Install Pyinstaller
+      run: python -m pip install pyinstaller
+
+    - name: Build project for Windows
+      run: 	pyinstaller --name toolbox --noconfirm --clean --console --copy-metadata pikepdf --copy-metadata ocrmypdf .\src\toolbox\cli.py
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: toolbox
+        path: dist/toolbox
