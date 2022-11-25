@@ -41,7 +41,7 @@ jobs:
       run: python -m pip install pyinstaller
 
     - name: Build project for Windows
-      run: 	pyinstaller --name toolbox --noconfirm --clean --console --copy-metadata pikepdf --copy-metadata ocrmypdf .\src\toolbox\cli.py
+      run: 	pyinstaller --name toolbox --noconfirm --clean --console --copy-metadata pikepdf --copy-metadata ocrmypdf --log-level WARN .\src\toolbox\cli.py
 
     - uses: actions/upload-artifact@v3
       with:
