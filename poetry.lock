@@ -418,7 +418,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pycodestyle"
-version = "2.9.1"
+version = "2.10.0"
 description = "Python style guide checker"
 category = "dev"
 optional = false
@@ -652,7 +652,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "2ed2a7c52e7987d4af65b01d08845129207f7b78dbd3f9529e5331feb1eb63ff"
+content-hash = "a8851ac2cc1d61f85357f7d7db20d2ea174b8907712c62104e84beacc973820b"
 
 [metadata.files]
 astroid = [
@@ -1055,6 +1055,7 @@ pdfminer-six = [
 ]
 pikepdf = [
     {file = "pikepdf-6.2.4-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:f35cecdab44cb01377e93a60a475bf4437854d98cb94379fcd65c6daa1c9a37e"},
+    {file = "pikepdf-6.2.4-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:ed0c7b4dcb0fec1cdcb4d7a054dd96204fec42fe7c12414ab3235ab16fb4042b"},
     {file = "pikepdf-6.2.4-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:62a8c05876b9c7af4cad0ba9a8f22c77775bcceb118c35d682735955f5485297"},
     {file = "pikepdf-6.2.4-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e99a90279a8254fa149d56cd307f94908c7844b2b8b42b61d241259804e40643"},
     {file = "pikepdf-6.2.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e0e66d49f8a85a4e0f915d42471643a5020bcdbef02586e49328ed417c13326a"},
@@ -1076,6 +1077,7 @@ pikepdf = [
     {file = "pikepdf-6.2.4-cp38-cp38-win32.whl", hash = "sha256:5887799a29510b53c7015b05d7276ee2e0f0ff1d782c75c3a3d1d9f68013665e"},
     {file = "pikepdf-6.2.4-cp38-cp38-win_amd64.whl", hash = "sha256:15725f1bf572abb9a675f61874da66dc22144e74f374f7e8d023558e8c9c3f38"},
     {file = "pikepdf-6.2.4-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:e3dbcecc145d46d37738a407e0ddcce7cfb76d3e116ab3ba9c80f4dd14e71a3d"},
+    {file = "pikepdf-6.2.4-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:f9174a555b94b55d5666264fb3d03858e3faebd8f80f0fa30f0c525266f5bc64"},
     {file = "pikepdf-6.2.4-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5c2de883986ef25e2e9b8ded8e5c285cb390950742164ce1bf116158009cd9c9"},
     {file = "pikepdf-6.2.4-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:746897cbfc0c200de6be428a4e92dee72d0e03e1ff00d56006ee94fb59be199d"},
     {file = "pikepdf-6.2.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1dedbb95bb2c67d6923c91cdcd5a92703d10e4c4825d85cd7b8b474039978741"},
@@ -1161,8 +1163,8 @@ pluggy = [
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 pycodestyle = [
-    {file = "pycodestyle-2.9.1-py2.py3-none-any.whl", hash = "sha256:d1735fc58b418fd7c5f658d28d943854f8a849b01a5d0a1e6f3f3fdd0166804b"},
-    {file = "pycodestyle-2.9.1.tar.gz", hash = "sha256:2c9607871d58c76354b697b42f5d57e1ada7d261c261efac224b664affdc5785"},
+    {file = "pycodestyle-2.10.0-py2.py3-none-any.whl", hash = "sha256:8a4eaf0d0495c7395bdab3589ac2db602797d76207242c17d470186815706610"},
+    {file = "pycodestyle-2.10.0.tar.gz", hash = "sha256:347187bdb476329d98f695c213d7295a846d1152ff4fe9bacb8a9590b8ee7053"},
 ]
 pycparser = [
     {file = "pycparser-2.21-py2.py3-none-any.whl", hash = "sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9"},
