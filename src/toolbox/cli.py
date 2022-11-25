@@ -13,3 +13,7 @@ command = typer.main.get_command(app)
 def main():
     """Main input command."""
     command()
+
+
+if __name__ == '__main__':
+    main()

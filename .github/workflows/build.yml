@@ -47,3 +47,4 @@ jobs:
       with:
         name: toolbox
         path: dist/toolbox
+        retention-days: 1
