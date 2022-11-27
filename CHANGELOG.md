@@ -1,6 +1,6 @@
 # Toolbox Change Log
 
-## 0.3.2 - 
+## 0.3.2 - 2022-11-27
 
 ### Added
 
