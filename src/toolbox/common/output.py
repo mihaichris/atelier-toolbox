@@ -23,7 +23,7 @@ def show_message(message: str, style: str = None) -> None:
     """Prints a message"""
     if style is None:
         style = INFO_STYLE
-    console.print(f"{style} {message}", style=style)
+    console.print(f"{message}", style=style)
 
 
 def abort(message: str):
