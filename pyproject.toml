@@ -6,7 +6,7 @@ authors = ["Mihai"]
 readme = "README.md"
 license = "MIT"
 repository = "https://github.com/mihaichris/atelier-toolbox"
-keywords = ["toolbox",  "automation",  "poetry"]
+keywords = ["toolbox", "automation",  "poetry"]
 packages = [{ include = "toolbox", from="src"}]
 
 [tool.poetry.dependencies]
