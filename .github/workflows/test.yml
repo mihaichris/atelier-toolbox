@@ -1,4 +1,5 @@
-name: "Test"
+name: Test
+run-name: Test and run static analysis
 
 on:
   pull_request:
@@ -51,7 +52,7 @@ jobs:
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       run: poetry install --no-interaction
 
-    - name: "Install dependencies  (Linux)"
+    - name: "Install dependencies (Linux)"
       run: |
         sudo apt-get update 
         sudo apt-get install tesseract-ocr ghostscript -y
