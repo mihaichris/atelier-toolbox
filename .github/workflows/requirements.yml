@@ -62,8 +62,9 @@ jobs:
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v4
-      branch: update-requirements-file
-      title: ${{ github.ref_name }} Update requirements file
-      body: Update requirements file from ${{ github.ref }}
-      labels: automation
-      reviewers: mihaichris
+      with:
+        branch: update-requirements-file
+        title: ${{ github.ref_name }} Update requirements file
+        body: Update requirements file from ${{ github.ref }}
+        labels: automation
+        reviewers: mihaichris
