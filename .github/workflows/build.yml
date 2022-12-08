@@ -1,4 +1,4 @@
-name: "build"
+run-name: Build project for different distributions
 
 on:
   pull_request:

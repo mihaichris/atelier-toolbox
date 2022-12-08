@@ -1,0 +1,69 @@
+run-name: Create requirements.txt file from poetry.lock
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - 'pyproject.toml'
+      - 'poetry.lock'
+    
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.10.8'
+
+jobs:
+  requirements:
+    name: Create requirements.txt
+    runs-on: "ubuntu-latest"
+    steps:
+    - name: Checkout repository
+      uses: "actions/checkout@v3"
+
+    - name: Install python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install poetry
+      uses: snok/install-poetry@v1.3.3
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
+
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction
+
+    - name: Install dependencies (Linux)
+      run: |
+        sudo apt-get update 
+        sudo apt-get install tesseract-ocr ghostscript -y
+
+    - name: Export requirements file with poetry
+      run: |
+        source $VENV 
+        poetry check
+        poetry lock
+        poetry export -f requirements.txt --output requirements.txt
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v4
+      branch: update-requirements-file
+      title: ${{ github.ref_name }} Update requirements file
+      body: Update requirements file from ${{ github.ref }}
+      labels: automation
+      reviewers: mihaichris
