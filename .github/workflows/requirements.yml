@@ -1,3 +1,4 @@
+name: Requirements
 run-name: Create requirements.txt file from poetry.lock
 
 on:
