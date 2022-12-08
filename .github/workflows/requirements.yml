@@ -60,10 +60,9 @@ jobs:
       uses: peter-evans/create-pull-request@v4
       with:
         branch: actions/update-requirements-file
-        committer: GitHub <noreply@github.com>
-        commit-message: "[${{ github.sha }}] update requirements file"
+        commit-message: "update requirements file from poetry.lock"
         title: Update requirements file
-        body: Update requirements file from ${{ github.ref }}
+        body: Update requirements file from ${{ github.sha }}
         labels: automation
         reviewers: mihaichris
         token: ${{ secrets.GITHUB_TOKEN }}
