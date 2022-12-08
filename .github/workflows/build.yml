@@ -1,3 +1,4 @@
+name: Build
 run-name: Build project for different distributions
 
 on:

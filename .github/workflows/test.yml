@@ -1,3 +1,4 @@
+name: Test
 run-name: Test and run static analysis
 
 on:
