@@ -7,7 +7,7 @@ wheel:
 	poetry build -f wheel
 
 .PHONY: install
-test:
+install:
 	poetry install
 
 .PHONY: lint

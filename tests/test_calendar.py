@@ -19,17 +19,23 @@ class TestCalendar(unittest.TestCase):
     def test_get_first_date_of_past_month(self):
         """Test get first date of past month."""
         now = datetime.datetime.now()
+        past_month = now.month-1
+        if past_month == 0:
+            past_month = 1
         last_date = datetime.datetime(now.year, now.month - 1, 1)
         last_month_first_date = get_first_date_of_month(
-            now.year, now.month-1)
+            now.year, past_month)
         self.assertEqual(last_date.strftime("%Y-%m-%d"), last_month_first_date)
 
     def test_get_first_date_of_future_month(self):
         """Test get first date of future month."""
         now = datetime.datetime.now()
-        future_date = datetime.datetime(now.year, now.month + 1, 1)
+        future_month = now.month + 1
+        if future_month == 13:
+            future_month = 12
+        future_date = datetime.datetime(now.year, future_month, 1)
         future_month_first_date = get_first_date_of_month(
-            now.year, now.month+1)
+            now.year, future_month)
         self.assertEqual(future_date.strftime(
             "%Y-%m-%d"), future_month_first_date)
 
