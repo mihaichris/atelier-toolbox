@@ -44,4 +44,6 @@ jobs:
       run: 	pyinstaller --name toolbox --noconfirm --clean --console --copy-metadata pikepdf --copy-metadata ocrmypdf --log-level WARN .\src\toolbox\cli.py
 
     - name: Check built project
-      run: ls -l 'dist/toolbox'
+      run: |
+        ls -l 'dist/toolbox'
+        ./dist/toolbox/toolbox --help  
