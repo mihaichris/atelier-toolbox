@@ -58,6 +58,8 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: atelier-toolbox_v${{ github.ref_name }}_windows_amd64
+
+    - name: "Zip windows downloaded artifact"
       run: zip -r atelier-toolbox_v${{ github.ref_name }}_windows_amd64.zip atelier-toolbox_v${{ github.ref_name }}_windows_amd64
 
     - name: "Create Checksum SHA256 file"
