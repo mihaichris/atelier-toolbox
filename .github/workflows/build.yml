@@ -2,47 +2,47 @@ name: Build
 run-name: Build project for different distributions
 
 on:
-  pull_request:
-    branches:
-      - "main"
-    paths-ignore:
-      - 'docs/**'
-      - 'README.md'
-      - 'CHANGELOG.md'
-      - '.gitignore'
-      - '.gitattributes'
-    
+    pull_request:
+        branches:
+            - "main"
+        paths-ignore:
+            - 'docs/**'
+            - 'README.md'
+            - 'CHANGELOG.md'
+            - '.gitignore'
+            - '.gitattributes'
+
 # Cancels all previous workflow runs for the same branch that have not yet completed.
 concurrency:
-  # The concurrency group contains the workflow name and the branch name.
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    # The concurrency group contains the workflow name and the branch name.
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 env:
-  PYTHON_VERSION: '3.10.8'
+    PYTHON_VERSION: '3.10.8'
 
 jobs:
-  build-windows:
-    name: "Build for Windows"
-    runs-on: "windows-latest"
-    steps:
-    - name: "Checkout repository"
-      uses: "actions/checkout@v3"
+    build-windows:
+        name: "Build for Windows"
+        runs-on: "windows-latest"
+        steps:
+            - name: "Checkout repository"
+              uses: "actions/checkout@v3"
 
-    - name: "Install python"
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
+            - name: "Install python"
+              uses: actions/setup-python@v4
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
 
-    - name: Install dependencies
-      # install charset-normalizer version 2 because latest version breaks the executable. TODO: remove when not needed.
-      run: python -m pip install -r requirements.txt && pip install charset-normalizer==2.1.1
+            - name: Install dependencies
+                # install charset-normalizer version 2 because latest version breaks the executable. TODO: remove when not needed.
+              run: python -m pip install -r requirements.txt && pip install charset-normalizer==2.1.1
 
-    - name: Install PyInstaller
-      run: python -m pip install pyinstaller
+            - name: Install PyInstaller
+              run: python -m pip install pyinstaller
 
-    - name: Build project for Windows
-      run: 	pyinstaller --name toolbox --noconfirm --clean --console --copy-metadata pikepdf --copy-metadata ocrmypdf --log-level WARN .\src\toolbox\cli.py
+            - name: Build project for Windows
+              run: pyinstaller --name toolbox --noconfirm --clean --console --copy-metadata pikepdf --copy-metadata ocrmypdf --log-level WARN .\src\toolbox\cli.py
 
-    - name: Check built project
-      run: ls -l 'dist/toolbox'
+            - name: Check built project
+              run: ls -l 'dist/toolbox'
