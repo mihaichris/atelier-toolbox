@@ -2,100 +2,100 @@ name: Test
 run-name: Test and run static analysis
 
 on:
-  pull_request:
-    branches:
-      - "main"
-    paths-ignore:
-      - 'docs/**'
-      - 'README.md'
-      - 'CHANGELOG.md'
-      - '.gitignore'
-      - '.gitattributes'
-    
+    pull_request:
+        branches:
+            - "main"
+        paths-ignore:
+            - 'docs/**'
+            - 'README.md'
+            - 'CHANGELOG.md'
+            - '.gitignore'
+            - '.gitattributes'
+
 # Cancels all previous workflow runs for the same branch that have not yet completed.
 concurrency:
-  # The concurrency group contains the workflow name and the branch name.
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    # The concurrency group contains the workflow name and the branch name.
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 env:
-  PYTHON_VERSION: '3.10.8'
+    PYTHON_VERSION: '3.10.8'
 
 jobs:
-  unit-testing:
-    name: "Unit Testing"
-    runs-on: "ubuntu-latest"
-    steps:
-    - name: "Checkout repository"
-      uses: "actions/checkout@v3"
+    unit-testing:
+        name: "Unit Testing"
+        runs-on: "ubuntu-latest"
+        steps:
+            - name: "Checkout repository"
+              uses: "actions/checkout@v3"
 
-    - name: "Install python"
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
-    
-    - name: "Install poetry"
-      uses: snok/install-poetry@v1.3.3
-      with:
-        virtualenvs-create: true
-        virtualenvs-in-project: true
-        installer-parallel: true
+            - name: "Install python"
+              uses: actions/setup-python@v4
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
 
-    - name: Load cached venv
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
-      with:
-        path: .venv
-        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+            - name: "Install poetry"
+              uses: snok/install-poetry@v1.3.3
+              with:
+                  virtualenvs-create: true
+                  virtualenvs-in-project: true
+                  installer-parallel: true
 
-    - name: Install dependencies
-      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install --no-interaction
+            - name: Load cached venv
+              id: cached-poetry-dependencies
+              uses: actions/cache@v3
+              with:
+                  path: .venv
+                  key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
 
-    - name: "Install dependencies (Linux)"
-      run: |
-        sudo apt-get update 
-        sudo apt-get install tesseract-ocr ghostscript -y
+            - name: Install dependencies
+              if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+              run: poetry install --no-interaction
 
-    - name: "Run Unit tests"
-      run: |
-        source $VENV 
-        poetry run test
+            - name: "Install dependencies (Linux)"
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install tesseract-ocr ghostscript -y
 
-  static-code-analysis:
-    name: "Static Code Analysis"
-    runs-on: "ubuntu-latest"
-    steps:
-    - name: "Checkout repository"
-      uses: "actions/checkout@v3"
-        
-    - name: "Install python"
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
+            - name: "Run Unit tests"
+              run: |
+                  source $VENV
+                  poetry run test
 
-    - name: "Install poetry"
-      uses: snok/install-poetry@v1.3.3
-      with:
-        virtualenvs-create: true
-        virtualenvs-in-project: true
-        installer-parallel: true
+    static-code-analysis:
+        name: "Static Code Analysis"
+        runs-on: "ubuntu-latest"
+        steps:
+            - name: "Checkout repository"
+              uses: "actions/checkout@v3"
 
-    - name: Load cached venv
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
-      with:
-        path: .venv
-        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+            - name: "Install python"
+              uses: actions/setup-python@v4
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
 
-    - name: Install dependencies
-      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install --no-interaction
+            - name: "Install poetry"
+              uses: snok/install-poetry@v1.3.3
+              with:
+                  virtualenvs-create: true
+                  virtualenvs-in-project: true
+                  installer-parallel: true
 
-    - name: "Run Pylint"
-      run: | 
-        source $VENV 
-        pylint src/
+            - name: Load cached venv
+              id: cached-poetry-dependencies
+              uses: actions/cache@v3
+              with:
+                  path: .venv
+                  key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+            - name: Install dependencies
+              if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+              run: poetry install --no-interaction
+
+            - name: "Run Pylint"
+              run: |
+                  source $VENV
+                  pylint src/
 
 
 
