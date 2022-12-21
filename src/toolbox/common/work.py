@@ -1,6 +1,5 @@
 """Module for work."""
-import numpy as np
-from toolbox.common.calendar import get_first_date_of_month, get_last_date_of_month
+import datetime
 
 
 def get_month_working_days(month: int, year: int) -> int:
@@ -10,9 +9,16 @@ def get_month_working_days(month: int, year: int) -> int:
         month (int): Month of the year.
         year (int): Year of the month.
     """
-    start_date = get_first_date_of_month(year, month)
-    end_date = get_last_date_of_month(year, month)
-    return np.busday_count(start_date, end_date) + 1
+    holidays = {}
+    businessdays = 0
+    for i in range(1, 32):
+        try:
+            thisdate = datetime.date(year, month, i)
+        except ValueError:
+            break
+        if thisdate.weekday() < 5 and thisdate not in holidays:  # Monday == 0, Sunday == 6
+            businessdays += 1
+    return businessdays
 
 
 def get_month_working_hours(month: int, year: int) -> int:
