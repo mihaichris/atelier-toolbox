@@ -20,6 +20,7 @@
 
 ### Fixed
 
+- [#43](https://github.com/mihaichris/atelier-toolbox/pull/44) Fix calendar working hours and days
 - [#19](https://github.com/mihaichris/atelier-toolbox/pull/20) Commands names in Makefile 
 - [#21](https://github.com/mihaichris/atelier-toolbox/pull/22) Fixed Calendar unit tests
 - [#13](https://github.com/mihaichris/atelier-toolbox/pull/18) Output style in console

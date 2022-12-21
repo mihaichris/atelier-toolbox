@@ -10,15 +10,15 @@ def get_month_working_days(month: int, year: int) -> int:
         year (int): Year of the month.
     """
     holidays = {}
-    businessdays = 0
+    business_days = 0
     for i in range(1, 32):
         try:
-            thisdate = datetime.date(year, month, i)
+            date = datetime.date(year, month, i)
         except ValueError:
             break
-        if thisdate.weekday() < 5 and thisdate not in holidays:  # Monday == 0, Sunday == 6
-            businessdays += 1
-    return businessdays
+        if date.weekday() < 5 and date not in holidays:  # Monday == 0, Sunday == 6
+            business_days += 1
+    return business_days
 
 
 def get_month_working_hours(month: int, year: int) -> int:
