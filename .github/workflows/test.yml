@@ -96,7 +96,3 @@ jobs:
               run: |
                   source $VENV
                   pylint src/
-
-
-
-  
