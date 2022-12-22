@@ -24,8 +24,8 @@ The package is supported on Python 3.10 and above.
 ## How to use
 
 ```python
-Usage: toolbox [OPTIONS] COMMAND [ARGS]...                                                                               
-                                                                                                                          
+Usage: toolbox [OPTIONS] COMMAND [ARGS]...
+
 ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ --install-completion          Install completion for the current shell.                                                │
 │ --show-completion             Show completion for the current shell, to copy it or customize the installation.         │
