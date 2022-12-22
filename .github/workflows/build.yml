@@ -46,4 +46,4 @@ jobs:
             - name: Check built project
               run: |
                   ls -l 'dist/toolbox'
-                  dist/toolbox --help
+                  dist/toolbox/toolbox.exe --help
