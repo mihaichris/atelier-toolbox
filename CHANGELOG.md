@@ -4,7 +4,7 @@
 
 ### Added
 
-- Nothing.
+- [#3](https://github.com/mihaichris/atelier-toolbox/pull/46) Generate requirements.txt on commit
 
 ### Changed
 
