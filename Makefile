@@ -21,3 +21,11 @@ requirements:
 .PHONY: executable
 executable:
 	pyinstaller  --name toolbox --noconfirm --clean --console --copy-metadata pikepdf --copy-metadata ocrmypdf .\src\toolbox\cli.py
+
+.PHONY: pre-commit-run
+pre-commit-run:
+	pre-commit run --all-files
+
+.PHONY: pre-commit-autoupdate
+pre-commit-autoupdate:
+	pre-commit autoupdate

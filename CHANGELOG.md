@@ -4,7 +4,7 @@
 
 ### Added
 
-- Nothing.
+- [#3](https://github.com/mihaichris/atelier-toolbox/pull/46) Generate requirements.txt on commit
 
 ### Changed
 
@@ -16,12 +16,12 @@
 
 ### Removed
 
-- Nothing.
+- [#26](https://github.com/mihaichris/atelier-toolbox/pull/27) Remove upload step from build workflow
 
 ### Fixed
 
-- [#26](https://github.com/mihaichris/atelier-toolbox/pull/27) Remove upload step from build workflow
-- [#19](https://github.com/mihaichris/atelier-toolbox/pull/20) Commands names in Makefile 
+- [#43](https://github.com/mihaichris/atelier-toolbox/pull/44) Fix calendar working hours and days
+- [#19](https://github.com/mihaichris/atelier-toolbox/pull/20) Commands names in Makefile
 - [#21](https://github.com/mihaichris/atelier-toolbox/pull/22) Fixed Calendar unit tests
 - [#13](https://github.com/mihaichris/atelier-toolbox/pull/18) Output style in console
 
@@ -29,6 +29,7 @@
 
 ### Added
 
+- [#24](https://github.com/mihaichris/atelier-toolbox/pull/39) Automatically publish to PyPI on new release
 - Github Action to build executable file using pyinstaller. This executable will be added to future releases.
 - requirements.txt file
 
