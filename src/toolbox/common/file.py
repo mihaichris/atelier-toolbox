@@ -12,3 +12,6 @@ def load_toml(path: str):
     """Load TOML file"""
     with open(path, mode='rb') as toml_file:
         return tomli.load(toml_file)
+
+def get_full_path(filename: str):
+    return os.path.realpath(filename)
