@@ -13,5 +13,7 @@ def load_toml(path: str):
     with open(path, mode='rb') as toml_file:
         return tomli.load(toml_file)
 
+
 def get_full_path(filename: str):
+    """Get full path from filename"""
     return os.path.realpath(filename)
