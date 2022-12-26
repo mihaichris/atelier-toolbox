@@ -3,9 +3,9 @@ from typing import List, Optional
 import hashlib
 from enum import Enum
 import typer
-from rich.console import Console
 from rich.table import Table
 from toolbox.common.file import get_full_path
+from toolbox.common.output import show_table
 from toolbox.sets.pdf import pdf_app
 from toolbox.sets.business import business_app
 
@@ -31,7 +31,6 @@ def hashing(files: Optional[List[str]] = typer.Option(..., '--file'),
             algorithm: HashingAlgorithms = typer.Option(HashingAlgorithms.SHA_512,
                                                         autocompletion=HashingAlgorithms.values)):
     """Hashing files method"""
-    console = Console()
     table = Table(show_header=True, header_style="bold magenta")
     table.add_column("Algorithm", style="dim", width=12)
     table.add_column("Hash")
@@ -42,7 +41,7 @@ def hashing(files: Optional[List[str]] = typer.Option(..., '--file'),
             content = hashing_file.read()
             hasher.update(content)
             table.add_row(algorithm, hasher.hexdigest(), get_full_path(hashing_file.name))
-    console.print(table)
+    show_table(table)
 
 
 command = typer.main.get_command(app)
