@@ -1,5 +1,6 @@
 """Module for output to console"""
 from rich.console import Console
+from rich.table import Table
 import typer
 
 console = Console()
@@ -17,6 +18,11 @@ def success_message(message: str) -> None:
 def error_message(message: str) -> None:
     """Prints an error message"""
     show_message(message=message, style=ERROR_STYLE)
+
+
+def show_table(table: Table) -> None:
+    """Prints a table"""
+    console.print(table)
 
 
 def show_message(message: str, style: str = None) -> None:
