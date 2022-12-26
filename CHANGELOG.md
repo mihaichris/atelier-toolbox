@@ -4,6 +4,8 @@
 
 ### Added
 
+- [#48](https://github.com/mihaichris/atelier-toolbox/pull/50) Add pre-commit install on make install command
+- [#14](https://github.com/mihaichris/atelier-toolbox/pull/49) Add hash subcommand
 - [#3](https://github.com/mihaichris/atelier-toolbox/pull/46) Generate requirements.txt on commit
 
 ### Changed
