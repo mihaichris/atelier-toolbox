@@ -1,36 +1,35 @@
 """Main command."""
 from typing import List, Optional
 import hashlib
-from enum import Enum
 import typer
 from rich.table import Table
 from toolbox.common.file import get_full_path
-from toolbox.common.output import show_table
+from toolbox.common.output import show_table, show_message
 from toolbox.sets.pdf import pdf_app
 from toolbox.sets.business import business_app
+from toolbox.sets.hash import HashingAlgorithms
+from toolbox.sets.hash import __version__ as hash_package_version
 
 app = typer.Typer(short_help="Tools for various automations. 🧰")
 app.add_typer(pdf_app, name="pdf")
 app.add_typer(business_app, name="business")
 
 
-class HashingAlgorithms(str, Enum):
-    """Hasing Algorithms enums"""
-    SHA_512 = "sha512"
-    SHA_256 = "sha256"
-    MD5 = "md5"
-
-    @classmethod
-    def values(cls) -> list:
-        """Get all values from class as list"""
-        return list(map(lambda c: c.value, cls))
+def version_callback(value: bool):
+    if value:
+        show_message(f"Hash CLI Version: {hash_package_version.__version__}")
+        raise typer.Exit()
 
 
 @app.command(name="hash", short_help="Hashing Files CLI Tool")
 def hashing(files: Optional[List[str]] = typer.Option(..., '--file'),
             algorithm: HashingAlgorithms = typer.Option(HashingAlgorithms.SHA_512,
-                                                        autocompletion=HashingAlgorithms.values)):
+                                                        autocompletion=HashingAlgorithms.values),
+            version: Optional[bool] = typer.Option(None, "--version", help="Get command version",
+                                                   callback=version_callback)):
     """Hashing files method"""
+    if version:
+        return hash_package_version
     table = Table(show_header=True, header_style="bold magenta")
     table.add_column("Algorithm", style="dim", width=12)
     table.add_column("Hash")
