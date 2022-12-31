@@ -1,4 +1,4 @@
-"""Business init file."""
-from toolbox.sets.hash.hash_algoritms_enum import HashingAlgorithms
+"""Hash init file."""
+from toolbox.sets.hash.cli import app as hash_app
 
-__all__ = ["HashingAlgorithms", "__version__"]
+__all__ = ["hash_app"]

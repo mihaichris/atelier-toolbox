@@ -1,3 +1,4 @@
+"""Hashing Algorithms package."""
 from enum import Enum
 
 
