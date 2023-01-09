@@ -166,7 +166,7 @@ class Download:
         with open(rel_path, "r") as RSTREAM:
             return RSTREAM.read().split("\n")
 
-    def get_name(self):
+    def _get_name(self):
         """Try to get the name of the file from the URL."""
 
         name = 'temp'
