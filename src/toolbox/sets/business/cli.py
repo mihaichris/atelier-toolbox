@@ -40,7 +40,8 @@ def working_days(
 
 
 @app.callback()
-def version(ver: bool = typer.Option(None, "--version", callback=version_callback, help="Get command version.",
+def version(ver: bool = typer.Option(None, "--version",
+                                     callback=version_callback, help="Get command version.",
                                      is_eager=True)):
     """Version Output."""
     return ver

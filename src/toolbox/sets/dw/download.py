@@ -1,16 +1,18 @@
+"""Download class"""
 import urllib.request
 import sys
 import time
 from os import path, get_terminal_size, name
 import itertools
 from re import match
+from toolbox.common.exceptions import DownloadException
 
 
 class Download:
 
     def __init__(
         self,
-        URL,
+        url,
         des=None,
         overwrite=False,
         continue_download=False,
@@ -21,7 +23,7 @@ class Download:
         icon_left="░",
         icon_border="|"
     ):
-        self.URL = URL
+        self.url = url
         self.des = des
         self.passed_dir = None
         self.headers = {}
@@ -38,6 +40,9 @@ class Download:
         self.continue_download = continue_download
         self.file_exists = False
         self.ostream = sys.stderr if self.echo else sys.stdout
+        self.basename = None
+        self.conn = None
+        self.req = None
 
     def _extract_border_icon(self, passed_icon):
         """"
@@ -58,9 +63,8 @@ class Download:
 
     def _build_headers(self, rem):
         """Build headers according to requirement."""
-        self.headers = {"Range": "bytes={}-".format(rem)}
-        print("Trying to resume download at: {} bytes".format(
-            rem), file=self.ostream)
+        self.headers = {"Range": f"bytes={rem}-"}
+        print(f"Trying to resume download at: {rem} bytes", file=self.ostream)
 
     def _parse_exists(self):
         """This function should be called if the file already exists.
@@ -69,9 +73,9 @@ class Download:
         """
         if self.overwrite:
             return
-        elif self.continue_download:
+        if self.continue_download:
             cur_size = path.getsize(self.des)
-            original_size = urllib.request.urlopen(self.URL).info()[
+            original_size = urllib.request.urlopen(self.url).info()[
                 'Content-Length']
 
             if original_size is None:
@@ -83,20 +87,13 @@ class Download:
         else:
             print("ERROR: File exists. See 'dw --help' for solutions.",
                   file=self.ostream)
-            exit(-1)
+            sys.exit(-1)
 
     def _preprocess_conn(self):
         """Make necessary things for the connection."""
-        self.req = urllib.request.Request(url=self.URL, headers=self.headers)
-
-        try:
-            self.conn = urllib.request.urlopen(self.req)
-        except Exception as e:
-            print("ERROR: {}".format(e))
-            exit()
-
+        self.req = urllib.request.Request(url=self.url, headers=self.headers)
+        self.conn = urllib.request.urlopen(self.req)
         self.f_size = self.conn.info()['Content-Length']
-
         if self.f_size is not None:
             self.f_size = int(self.f_size)
 
@@ -133,7 +130,7 @@ class Download:
         """
         return not path.exists(file_path) or not path.isfile(file_path)
 
-    def _parse_URL(self):
+    def _parse_url(self):
         """
         The URL can be a file as well so in that case we
         will download each URL from that file.
@@ -141,44 +138,43 @@ class Download:
         download just that one.
         returns: A list of urls
         """
-        if match(r"^https?://*|^file://*", self.URL):
-            return [self.URL]
+        if match(r"^https?://*|^file://*", self.url):
+            return [self.url]
 
         # Below code will only be executed if the -b
         # flag is passed
         if not self.batch:
-            print("{}: not a valid URL. Pass -b if it is a file "
-                  "containing various URL's and you want bulk download."
-                  .format(self.URL))
-            exit(0)
+            print(f"{self.url}: not a valid URL. Pass -b if it is a file "
+                  "containing various URL's and you want bulk download.")
+            sys.exit(0)
 
-        rel_path = path.expanduser(self.URL)
+        rel_path = path.expanduser(self.url)
 
         # Put a check to see if the file is present
         if self._is_valid_src_path(rel_path):
-            print("{}: not a valid name or is a directory".format(rel_path))
-            exit(-1)
+            print(f"{rel_path}: not a valid name or is a directory")
+            sys.exit(-1)
 
         # If it's not an URL, read the contents.
         # Since the URL is not an actual URL, we're assuming
         # it is a file that contains URL's seperated by new
         # lines.
-        with open(rel_path, "r") as RSTREAM:
-            return RSTREAM.read().split("\n")
+        with open(rel_path, "r", encoding="utf8") as rstream:
+            return rstream.read().split("\n")
 
     def _get_name(self):
         """Try to get the name of the file from the URL."""
 
-        name = 'temp'
-        temp_url = self.URL
+        file_name = 'temp'
+        temp_url = self.url
 
         split_url = temp_url.split('/')[-1]
 
         if split_url:
             # Remove query params if any
-            name = split_url.split("?")[0]
+            file_name = split_url.split("?")[0]
 
-        return name
+        return file_name
 
     def _format_size(self, size):
         """Format the passed size.
@@ -246,18 +242,10 @@ class Download:
             self._cycle_bar = itertools.cycle(
                 range(0, int(reduce_with_each_iter)))
 
-        return (next(self._cycle_bar) + 1)
+        return next(self._cycle_bar) + 1
 
     def _get_bar(self, status, length, percent=None):
         """Calculate the progressbar depending on the length of terminal."""
-
-        map_bar = {
-            40: r"|%-40s|",
-            20: r"|%-20s|",
-            10: r"|%-10s|",
-            5: r"|%-5s|",
-            2: r"|%-2s|"
-        }
         # Till now characters present is the length of status.
         # length is the length of terminal.
         # We need to decide how long our bar will be.
@@ -275,7 +263,7 @@ class Download:
 
         # Add space.
         space = length - (len(status) + 2 + reduce_with_each_iter + 5)
-        status += r"%s" % (" " * space)
+        status += fr'{" " * space}'
 
         if reduce_with_each_iter > 0:
             # Make BOLD
@@ -284,18 +272,14 @@ class Download:
             status += "\033[1;34m"
             if percent is not None:
                 done = int(percent / (100 / reduce_with_each_iter))
-                status += r"%s%s%s%s" % (
-                    self.border_left,
-                    self.done_icon * done,
-                    self.left_icon * (reduce_with_each_iter - done),
-                    self.border_right)
+                status += fr"{self.border_left}{self.done_icon * done}\
+                {self.left_icon * (reduce_with_each_iter - done)}{self.border_right}"
             else:
                 current_pos = self._get_pos(reduce_with_each_iter)
-                bar = " " * (current_pos - 1) if current_pos > 1 else ""
-                bar += self.done_icon * 1
-                bar += " " * int((reduce_with_each_iter) - current_pos)
-                status += r"%s%s%s" % (self.border_left,
-                                       bar, self.border_right)
+                status_bar = " " * (current_pos - 1) if current_pos > 1 else ""
+                status_bar += self.done_icon * 1
+                status_bar += " " * int(reduce_with_each_iter - current_pos)
+                status += fr"{self.border_left}{status_bar}{self.border_right}"
 
         status += "\033[0m"
         return status
@@ -303,89 +287,80 @@ class Download:
     def _download(self):
         try:
             self._parse_destination()
-
-            # Download files with a progressbar showing the percentage
             self._preprocess_conn()
-            WSTREAM = open(self.des, 'ab')
-
-            if self.f_size is not None and self.quiet is False:
-                formatted_file_size, dw_unit = self._format_size(self.f_size)
-                print("Size: {} {}".format(
-                    round(formatted_file_size), dw_unit), file=self.ostream)
-
-            _owrite = ("Overwriting: {}" if (self.file_exists and
-                                             self.overwrite) else "Saving as: {}").format(self.des)
-            if self.quiet:
-                self.ostream.write(_owrite)
-                self.ostream.write("...")
-            else:
-                print(_owrite, file=self.ostream)
-                self.ostream.flush()
-
-            file_size_dl = 0
-            block_sz = 8192
-
-            beg_time = time.time()
-            while True:
-                buffer = self.conn.read(block_sz)
-                if not buffer:
-                    break
-
-                file_size_dl += len(buffer)
-                WSTREAM.write(buffer)
-
-                # Initialize all the variables that cannot be calculated
-                # to ''
-                speed = ''
-                time_left = ''
-                time_unit = ''
-                percent = ''
-
-                speed, s_unit, time_left, time_unit = self._get_speed_n_time(
-                    file_size_dl,
-                    beg_time,
-                    cur_time=time.time()
-                )
-
-                if self.f_size is not None:
-                    percent = file_size_dl * 100 / self.f_size
-
-                # Get basename
-                self.basename = path.basename(self.des)
-
-                # Calculate amount of space req in between
-                length = self._get_terminal_length()
-
-                f_size_disp, dw_unit = self._format_size(file_size_dl)
-
-                status = r"%-7s" % ("%s %s" % (round(f_size_disp), dw_unit))
-                status += r"| %-3s %s " % ("%s" % (speed), s_unit)
-
-                if self.f_size is not None:
-                    status += r"|| ETA: %-4s " % ("%s %s" %
-                                                  (time_left, time_unit))
-                    status = self._get_bar(status, length, percent)
-                    status += r" %-4s" % ("{}%".format(round(percent)))
+            with open(self.des, 'ab') as wstream:
+                if self.f_size is not None and self.quiet is False:
+                    formatted_file_size, dw_unit = self._format_size(self.f_size)
+                    print(f"Size: {round(formatted_file_size)} {dw_unit}", file=self.ostream)
+                _owrite = (f"Overwriting: {self.des}" if (self.file_exists and self.overwrite)
+                           else f"Saving as: {self.des}")
+                if self.quiet:
+                    self.ostream.write(_owrite)
+                    self.ostream.write("...")
                 else:
-                    status = self._get_bar(status, length)
-
-                if not self.quiet:
-                    self.ostream.write('\r')
-                    self.ostream.write(status)
+                    print(_owrite, file=self.ostream)
                     self.ostream.flush()
+                file_size_dl = 0
+                block_sz = 8192
+                beg_time = time.time()
+                while True:
+                    buffer = self.conn.read(block_sz)
+                    if not buffer:
+                        break
 
-            WSTREAM.close()
+                    file_size_dl += len(buffer)
+                    wstream.write(buffer)
+                    percent = ''
+
+                    speed, s_unit, time_left, time_unit = self._get_speed_n_time(
+                        file_size_dl,
+                        beg_time,
+                        cur_time=time.time()
+                    )
+
+                    if self.f_size is not None:
+                        percent = file_size_dl * 100 / self.f_size
+
+                    # Get basename
+                    self.basename = path.basename(self.des)
+
+                    # Calculate amount of space req in between
+                    length = self._get_terminal_length()
+
+                    f_size_disp, dw_unit = self._format_size(file_size_dl)
+
+                    status = fr"{round(f_size_disp)} {dw_unit}-7s"
+                    status += fr'| {speed}-3s {s_unit}'
+
+                    if self.f_size is not None:
+                        status += fr"|| ETA: {time_left} {time_unit}-4s "
+                        status = self._get_bar(status, length, percent)
+                        status += fr" {round(percent)}-4s"
+                    else:
+                        status = self._get_bar(status, length)
+
+                    if not self.quiet:
+                        self.ostream.write('\r')
+                        self.ostream.write(status)
+                        self.ostream.flush()
+
+            wstream.close()
             if self.quiet:
                 self.ostream.write("...success\n")
                 self.ostream.flush()
-            return True
+
         except KeyboardInterrupt:
             self.ostream.flush()
             print("Keyboard Interrupt passed. Exiting peacefully.")
-            exit(0)
-        except Exception as e:
-            print("ERROR: {}".format(e))
+            sys.exit(0)
+        except DownloadException as exception:
+            print(f'ERROR: {exception}')
             return False
+        return True
+
+    def is_quiet(self):
+        """Return if download is quiet."""
+        return self.quiet
 
     def download(self):
         """
@@ -393,8 +368,8 @@ class Download:
         and destinations and keep passing to the actual download
         method _download().
         """
-        urls = self._parse_URL()
+        urls = self._parse_url()
         for url in urls:
-            self.URL = url
+            self.url = url
             self._download()
             self.des = self.passed_dir

@@ -90,15 +90,15 @@ class TestDownloader(unittest.TestCase):
         We will test the test.zip file which has a hash
         of `a527ded21dc1c68eba11687453c3690d`.
         """
-        HASH = "a527ded21dc1c68eba11687453c3690d"
+        hash = "a527ded21dc1c68eba11687453c3690d"
 
         download = Download(TEST_URL)
         download.download()
 
         # Once download is done, check the integrity
         _hash = md5(open("test.zip", "rb").read()).hexdigest()
-        print(_hash)
-        assert _hash == HASH, "Integrity check failed for test.zip"
+
+        assert _hash == hash, "Integrity check failed for test.zip"
 
         # Remove the file now
         remove(download.basename)

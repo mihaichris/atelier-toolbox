@@ -16,31 +16,33 @@ def version_callback(value: bool):
 
 
 @app.command(short_help="Download from url")
-def url(url: str,
+def url(url_link: str,
         destination: Optional[str] = typer.Argument(None,
-                                                    help="Target filepath (existing directories will be treated as the target location)"),
+                                                    help="Target filepath"),
         force: bool = typer.Option(False, '--force', '-f', '-o',
                                    help="Overwrite if the file already exists.", is_flag=True),
         resume: bool = typer.Option(False, '--resume', '-c',
-                                    help="Resume failed or cancelleddownload (partial sanity check).", is_flag=True),
+                                    help="Resume failed or cancelled download.", is_flag=True),
         echo: bool = typer.Option(False, '--echo', '-e',
-                                  help="Print the filepath to stdout after downloading (other output will be redirected to stderr).",
+                                  help="Print the filepath to stdout after downloading.",
                                   is_flag=True),
         quiet: bool = typer.Option(False, '--quiet', '-q',
                                    help="Suppress filesize and progress info.", is_flag=True),
         batch: bool = typer.Option(False, '--batch', '-b',
-                                   help="Download files in batch. If this flag is passed the passed source will be considered as a file with download links seperated by a newline. This flag will be ignored if source is a valid URL.",
+                                   help="Download files in batch.",
                                    is_flag=True)):
-    downloader = Download(URL=url, des=destination, overwrite=force,
+    """Download from url."""
+    downloader = Download(url=url_link, des=destination, overwrite=force,
                           continue_download=resume, echo=echo,
                           quiet=quiet, batch=batch)
-    success = downloader.download()
-    if success and echo:
+    downloader.download()
+    if echo:
         print(downloader.des)
 
 
 @app.callback()
-def version(ver: bool = typer.Option(None, "--version", callback=version_callback, help="Get command version.",
+def version(ver: bool = typer.Option(None, "--version",
+                                     callback=version_callback, help="Get command version.",
                                      is_eager=True)):
     """Version Output."""
     return ver
