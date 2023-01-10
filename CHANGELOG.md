@@ -1,9 +1,10 @@
 # Toolbox Change Log
 
-## x.y.z
+## 1.0.0
 
 ### Added
 
+- [#40](https://github.com/mihaichris/atelier-toolbox/pull/51) Add downloader cli subcommand
 - [#48](https://github.com/mihaichris/atelier-toolbox/pull/50) Add pre-commit install on make install command
 - [#14](https://github.com/mihaichris/atelier-toolbox/pull/49) Add hash subcommand
 - [#3](https://github.com/mihaichris/atelier-toolbox/pull/46) Generate requirements.txt on commit
