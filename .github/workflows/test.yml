@@ -95,4 +95,4 @@ jobs:
             - name: "Run Pylint"
               run: |
                   source $VENV
-                  pylint src/
+                  pylint src/ --rcfile=standard.rc
