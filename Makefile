@@ -13,7 +13,7 @@ install:
 
 .PHONY: lint
 lint:
-	pylint src
+	pylint src --rcfile=standard.rc
 
 .PHONY: requirements
 requirements:
