@@ -21,7 +21,7 @@ class TestDownloader(unittest.TestCase):
 
     def test__extract_border_icon(self):
         """Test the _extract_border_icon method"""
-        download = Download(TEST_URL)
+        download = Download(TEST_URL, quiet=True)
 
         icon_one = download._extract_border_icon("#")
         icon_two = download._extract_border_icon("[]")
@@ -35,7 +35,7 @@ class TestDownloader(unittest.TestCase):
 
     def test__build_headers(self):
         """Test the _build_headers method"""
-        download = Download(TEST_URL)
+        download = Download(TEST_URL, quiet=True)
 
         download._build_headers(1024)
         header_built = download.headers
@@ -45,7 +45,7 @@ class TestDownloader(unittest.TestCase):
 
     def test__preprocess_conn(self):
         """Test the _preprocess_conn method"""
-        download = Download(TEST_URL)
+        download = Download(TEST_URL, quiet=True)
         download._preprocess_conn()
 
         assert download.f_size == 154, "Should be 154"
@@ -54,7 +54,7 @@ class TestDownloader(unittest.TestCase):
         """
         Test the function that formats the size
         """
-        download = Download(TEST_URL)
+        download = Download(TEST_URL, quiet=True)
 
         size, unit = download._format_size(255678999)
 
@@ -70,7 +70,7 @@ class TestDownloader(unittest.TestCase):
         Test the format time function that formats the
         passed time into a readable value
         """
-        download = Download(TEST_URL)
+        download = Download(TEST_URL, quiet=True)
 
         time, unit = download._format_time(2134991)
 
@@ -92,7 +92,7 @@ class TestDownloader(unittest.TestCase):
         """
         hash = "a527ded21dc1c68eba11687453c3690d"
 
-        download = Download(TEST_URL)
+        download = Download(url=TEST_URL, quiet=True)
         download.download()
 
         # Once download is done, check the integrity
