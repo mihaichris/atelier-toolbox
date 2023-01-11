@@ -67,7 +67,8 @@ jobs:
 
             - name: Create GitHub Release
               uses: ncipollo/release-action@v1.11.2
-              artifacts: "atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip,atelier-toolbox_${{ github.ref_name }}_checksums.sha256"
+              with:
+                artifacts: "atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip,atelier-toolbox_${{ github.ref_name }}_checksums.sha256"
 
     publish-pypi:
         name: Build and publish Python 🐍 distributions 📦 to PyPI
