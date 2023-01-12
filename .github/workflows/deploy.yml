@@ -59,6 +59,9 @@ jobs:
               with:
                   name: atelier-toolbox_${{ github.ref_name }}_windows_amd64
 
+            - name: "Test list"
+              run: ls -R
+
             - name: "Zip windows downloaded artifact"
               run: zip -r atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip atelier-toolbox_${{ github.ref_name }}_windows_amd64
 
