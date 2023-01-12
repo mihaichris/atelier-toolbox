@@ -57,13 +57,13 @@ jobs:
             - name: Download built Windows package
               uses: actions/download-artifact@v3
               with:
-                  name: atelier-toolbox_${{ github.ref_name }}_windows_amd64
+                  path: builded-artifacts
 
-            - name: "Test list"
-              run: ls -R
+            - name: "Test ls"
+              run: ls builded-artifacts
 
             - name: "Zip windows downloaded artifact"
-              run: zip -r atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip atelier-toolbox_${{ github.ref_name }}_windows_amd64
+              run: zip -r atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip builded-artifacts/atelier-toolbox_${{ github.ref_name }}_windows_amd64
 
             - name: "Create Checksum SHA256 file"
               run: sha256sum atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip > atelier-toolbox_${{ github.ref_name }}_checksums.sha256
