@@ -61,7 +61,7 @@ jobs:
 
             - name: "Zip downloaded artifact"
               run: |
-                zip -jr atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip builded-artifacts/atelier-toolbox_${{ github.ref_name }}_windows_amd64
+                (cd builded-artifacts/atelier-toolbox_${{ github.ref_name }}_windows_amd64 && zip -r ../../atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip .)
 
             - name: "Create Checksum SHA256 files"
               run: |
