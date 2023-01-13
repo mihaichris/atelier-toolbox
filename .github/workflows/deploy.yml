@@ -61,18 +61,16 @@ jobs:
 
             - name: "Zip downloaded artifact"
               run: |
-                zip -r atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip atelier-toolbox_${{ github.ref_name }}_windows_amd64
-              working-directory: builded-artifacts
+                zip -jr atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip builded-artifacts/atelier-toolbox_${{ github.ref_name }}_windows_amd64
 
-            - name: "Create Checksum SHA256 file"
+            - name: "Create Checksum SHA256 files"
               run: |
                 sha256sum atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip > atelier-toolbox_${{ github.ref_name }}_checksums.sha256
-              working-directory: builded-artifacts
 
             - name: Create GitHub Release
               uses: ncipollo/release-action@v1.11.2
               with:
-                artifacts: "builded-artifacts/atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip,builded-artifacts/atelier-toolbox_${{ github.ref_name }}_checksums.sha256"
+                artifacts: "atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip,atelier-toolbox_${{ github.ref_name }}_checksums.sha256"
 
     publish-pypi:
         name: Build and publish Python 🐍 distributions 📦 to PyPI
