@@ -1,5 +1,27 @@
 # Toolbox Change Log
 
+## 1.0.3 - 2023-06-08
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Security updates
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 1.0.2 - 2023-02-08
 
 ### Added
