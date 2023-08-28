@@ -1,5 +1,27 @@
 # Toolbox Change Log
 
+## 1.0.5 - 2023-08-28
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#56](https://github.com/mihaichris/atelier-toolbox/pull/56) Bump reportlab from 3.6.12 to 3.6.13
+
 ## 1.0.4 - 2023-07-15
 
 ### Added
