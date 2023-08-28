@@ -1,5 +1,28 @@
 # Toolbox Change Log
 
+## 1.0.6 - 2023-08-28
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#58](https://github.com/mihaichris/atelier-toolbox/pull/58) Bump pygments from 2.14.0 to 2.15.0
+- [#57](https://github.com/mihaichris/atelier-toolbox/pull/57) Bump cryptography from 41.0.2 to 41.0.3
+
 ## 1.0.5 - 2023-08-28
 
 ### Added
