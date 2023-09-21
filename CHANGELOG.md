@@ -1,5 +1,27 @@
 # Toolbox Change Log
 
+## 1.0.7 - 2023-09-21
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#59](https://github.com/mihaichris/atelier-toolbox/pull/59) Bump cryptography from 41.0.3 to 41.0.4
+
 ## 1.0.6 - 2023-08-28
 
 ### Added
