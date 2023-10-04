@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "atelier-toolbox"
-version = "1.0.7"
+version = "1.0.8"
 description = "Tools for various automations 🧰"
 authors = ["Mihai"]
 readme = "README.md"

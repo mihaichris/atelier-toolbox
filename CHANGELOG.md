@@ -1,5 +1,27 @@
 # Toolbox Change Log
 
+## 1.0.8 - 2023-10-04
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#60](https://github.com/mihaichris/atelier-toolbox/pull/60) Bump pillow from 9.4.0 to 10.0.1
+
 ## 1.0.7 - 2023-09-21
 
 ### Added
