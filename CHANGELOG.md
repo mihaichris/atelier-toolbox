@@ -1,5 +1,27 @@
 # Toolbox Change Log
 
+## 1.1.0 - 2023-11-05
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- [#61](https://github.com/mihaichris/atelier-toolbox/pull/61) Remove force installation for charset normalizer lower version
+
+### Fixed
+
+- Nothing.
+
 ## 1.0.8 - 2023-10-04
 
 ### Added

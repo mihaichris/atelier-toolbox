@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "atelier-toolbox"
-version = "1.0.8"
+version = "1.1.0"
 description = "Tools for various automations 🧰"
 authors = ["Mihai"]
 readme = "README.md"
@@ -11,8 +11,6 @@ packages = [{ include = "toolbox", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-ocrmypdf = "^14.0.1"
-pdf2docx = "^0.5.6"
 typer = { extras = ["all"], version = "^0.6.1" }
 rich = "^12.6.0"
 click = "^8.1.3"
