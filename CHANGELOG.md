@@ -1,5 +1,27 @@
 # Toolbox Change Log
 
+## 1.1.1 - 2023-11-05
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#62](https://github.com/mihaichris/atelier-toolbox/pull/62) Fix deploy for windows.
+
 ## 1.1.0 - 2023-11-05
 
 ### Added
