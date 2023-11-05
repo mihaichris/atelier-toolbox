@@ -20,7 +20,7 @@
 
 ### Fixed
 
-- Fix deploy for windows.
+- [#62](https://github.com/mihaichris/atelier-toolbox/pull/62) Fix deploy for windows.
 
 ## 1.1.0 - 2023-11-05
 
