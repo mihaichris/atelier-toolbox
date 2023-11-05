@@ -56,17 +56,20 @@ jobs:
             - name: Download built Windows package
               uses: actions/download-artifact@v3
               with:
-                  name: atelier-toolbox_${{ github.ref_name }}_windows_amd64
+                  path: builded-artifacts
 
-            - name: "Zip windows downloaded artifact"
-              run: zip -r atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip atelier-toolbox_${{ github.ref_name }}_windows_amd64
+            - name: "Zip downloaded artifact"
+              run: |
+                (cd builded-artifacts/atelier-toolbox_${{ github.ref_name }}_windows_amd64 && zip -r ../../atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip .)
 
-            - name: "Create Checksum SHA256 file"
-              run: sha256sum atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip > atelier-toolbox_${{ github.ref_name }}_checksums.sha256
+            - name: "Create Checksum SHA256 files"
+              run: |
+                sha256sum atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip > atelier-toolbox_${{ github.ref_name }}_checksums.sha256
 
             - name: Create GitHub Release
               uses: ncipollo/release-action@v1.11.2
-              artifacts: "atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip,atelier-toolbox_${{ github.ref_name }}_checksums.sha256"
+              with:
+                artifacts: "atelier-toolbox_${{ github.ref_name }}_windows_amd64.zip,atelier-toolbox_${{ github.ref_name }}_checksums.sha256"
 
     publish-pypi:
         name: Build and publish Python 🐍 distributions 📦 to PyPI
